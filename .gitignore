@@ -1,0 +1,20 @@
+# ignore check_mk symlink directories
+version
+share
+lib
+include
+bin
+
+# ignore check_mk working dirs 
+var
+tmp
+etc
+
+# ignore other files 
+.bash_history
+.bashrc
+.j4p
+.modulebuildrc
+.pip/
+.profile
+.viminfo
