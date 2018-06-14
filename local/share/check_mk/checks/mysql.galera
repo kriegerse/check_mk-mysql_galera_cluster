@@ -379,7 +379,7 @@ def check_galera_repl_health(item, params, parsed):
     perfdata.append( ('send_queue_avg', float(parsed[item]['wsrep_local_send_queue_avg']), warn, crit) )
     perfdata.append( ('send_queue_max', float(parsed[item]['wsrep_local_send_queue_max']), None, None) )
     perfdata.append( ('send_queue_min', float(parsed[item]['wsrep_local_send_queue_min']), None, None) )
-    perfdata.append( ('send_queue', float(parsed[item]['wsrep_local_send_queue']), None, None) )
+    perfdata.append( ('send_queue',     float(parsed[item]['wsrep_local_send_queue']),     None, None) )
 
 
     # wsrep_flow_control_paused - Ideally, the return value should stay as close to 0.0 as possible, 
