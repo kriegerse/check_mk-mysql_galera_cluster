@@ -2,6 +2,7 @@
 # -*- encoding: utf-8; py-indent-offset: 4 -*-
 
 import re
+import time
 
 # example agent output:
 # <<<mysql>>>
@@ -326,6 +327,7 @@ factory_settings['galera_repl_health_default_levels'] = {
 
 
 def check_galera_repl_health(item, params, parsed):
+    cur_time = time.time()
     ok_code = 0
     output = list()
     perfdata = list()
@@ -400,6 +402,10 @@ def check_galera_repl_health(item, params, parsed):
         output.append("FlowCtrlPaused: " + str(round(float(parsed[item]['wsrep_flow_control_paused']),3)))
 
     perfdata.append( ('flow_control_paused', float(parsed[item]['wsrep_flow_control_paused']), warn, crit) )
+    flow_control_recv = get_rate("flow_control_recv", cur_time, float(parsed[item]['wsrep_flow_control_recv']))
+    flow_control_sent = get_rate("flow_control_sent", cur_time, float(parsed[item]['wsrep_flow_control_sent']))
+    perfdata.append( ('flow_control_recv', float(flow_control_recv), None, None) )
+    perfdata.append( ('flow_control_sent', float(flow_control_sent), None, None) )
 
 
     # wsrep_cert_deps_distance - shows the average distance between the lowest and highest seqno, 
