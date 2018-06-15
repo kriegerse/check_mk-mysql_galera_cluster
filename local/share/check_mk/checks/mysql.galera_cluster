@@ -114,7 +114,7 @@ import time
 # wsrep_sync_wait 0
 
 # run check from cli 
-# cmk --checks=mysql.galera -nvp <hostname>
+# cmk --checks=mysql.galera_cluster -nvp <hostname>
 
 
 ############################################################################################
@@ -146,7 +146,7 @@ def set_ok_code(current_ok_code = int(), new_ok_code = int()):
 # MySQL Galera Cluster State
 ############################################################################################
 # run check from cli 
-# cmk --checks=mysql.galera -nvp <hostname>
+# cmk --checks=mysql.galera_cluster -nvp <hostname>
 #
 # based on:
 # http://galeracluster.com/documentation-webpages/monitoringthecluster.html#checking-cluster-integrity
@@ -155,7 +155,7 @@ def set_ok_code(current_ok_code = int(), new_ok_code = int()):
 
 # factory settings 
 factory_settings["galera_cluster_state_default_levels"] = {
-    'wsrep_cluster_size' : (2,2),
+    'wsrep_cluster_size' : (3,2,2),
     'wsrep_cluster_status' : "Primary",
 }
 
@@ -170,21 +170,22 @@ def check_galera_cluster_state(item, params, parsed):
         return (ok_code, ', '.join(output))
     
     # check cluster size 
+    expected, warn, crit = params.get('wsrep_cluster_size')
     if 'wsrep_cluster_size' not in parsed[item]:
         ok_code = set_ok_code(ok_code,3)
         output.append("Could not find 'wsrep_cluster_size' in agent output")
     # cluster size is (below) crit
-    elif int(parsed[item]['wsrep_cluster_size']) <= int(params.get('wsrep_cluster_size')[1]):
+    elif int(parsed[item]['wsrep_cluster_size']) <= int(crit):
         ok_code = set_ok_code(ok_code,2)
-        output.append("Size: " + str(parsed[item]['wsrep_cluster_size']) + "(!!)")
+        output.append("Size: " + str(parsed[item]['wsrep_cluster_size']) + " expected " + str(expected) + " crit at " + str(crit) + "(!!)")
     # cluster size is (below) warn but aboth crit 
-    elif ( int(parsed[item]['wsrep_cluster_size']) <= int(params.get('wsrep_cluster_size')[0]) and
-           int(parsed[item]['wsrep_cluster_size']) > int(params.get('wsrep_cluster_size')[1])):
+    elif ( int(parsed[item]['wsrep_cluster_size']) <= int(warn) and
+           int(parsed[item]['wsrep_cluster_size']) > int(crit)):
         ok_code = set_ok_code(ok_code,1)
-        output.append("Size: " + str(parsed[item]['wsrep_cluster_size']) + "(!)")
+        output.append("Size: " + str(parsed[item]['wsrep_cluster_size']) + " expected " + str(expected) + " warn at " + str(warn) +  "(!)")
     # everything is as expected
     else:
-        output.append("Size: " + str(parsed[item]['wsrep_cluster_size']))
+        output.append("Size: " + str(parsed[item]['wsrep_cluster_size']) + " expected " + str(expected) )
 
     
     # check cluster status
@@ -220,7 +221,7 @@ def check_galera_cluster_state(item, params, parsed):
 
 
 # define the check
-check_info["mysql.galera"] = {
+check_info["mysql.galera_cluster"] = {
     'parse_function':		parse_mysql_galera,
     'check_function':		check_galera_cluster_state,
     'inventory_function':	inventory_mysql_galera,
@@ -235,7 +236,7 @@ check_info["mysql.galera"] = {
 # MySQL Galera Node State
 ############################################################################################
 # run check from cli 
-# cmk --checks=mysql.galera_node_state -nvp <hostname>
+# cmk --checks=mysql.galera_cluster_node_state -nvp <hostname>
 #
 # based on:
 # http://galeracluster.com/documentation-webpages/monitoringthecluster.html#checking-the-node-status
@@ -298,7 +299,7 @@ def check_galera_node_state(item, params, parsed):
     return (ok_code, ', '.join(output))
 
 
-check_info["mysql.galera_node_state"] = {
+check_info["mysql.galera_cluster_node_state"] = {
      'parse_function':		parse_mysql_galera,
      'check_function':		check_galera_node_state,
      'inventory_function':	inventory_mysql_galera,
@@ -313,7 +314,7 @@ check_info["mysql.galera_node_state"] = {
 # MySQL Galera Replication Health
 ############################################################################################
 # run check from cli 
-# cmk --checks=mysql.galera_repl_health -nvp <hostname>
+# cmk --checks=mysql.galera_cluster_repl_health -nvp <hostname>
 #
 # based on:
 # http://galeracluster.com/documentation-webpages/monitoringthecluster.html#checking-the-replication-health
@@ -416,7 +417,7 @@ def check_galera_repl_health(item, params, parsed):
     return ok_code, ', '.join(output), perfdata
 
 
-check_info["mysql.galera_repl_health"] = {
+check_info["mysql.galera_cluster_repl_health"] = {
      'parse_function':          parse_mysql_galera,
      'check_function':          check_galera_repl_health,
      'inventory_function':      inventory_mysql_galera,
