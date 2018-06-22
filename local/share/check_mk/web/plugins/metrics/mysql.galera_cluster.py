@@ -149,17 +149,25 @@ graph_info.append({
 })
 
 
-# Cert Deps Distance vs. Graph Flow Control
+# Graph Flow Control Paused
 graph_info.append( {
-   "title":       _("Flow Control"),
+   "title":       _("Flow Control Paused"),
    "metrics":      [
        ( "flow_control_paused", "area" ),
-       ( "flow_control_recv",   "-line"),
-       ( "flow_control_sent",   "-line"),
    ],
    "scalars": [
        "flow_control_paused:warn",
        "flow_control_paused:crit",
+   ],
+})
+
+
+# Graph Flow Control Commands 
+graph_info.append( {
+   "title":       _("Flow Control Recv/Sent"),
+   "metrics":      [
+       ( "flow_control_recv",   "line" ),
+       ( "flow_control_sent",   "-line" ),
    ],
 })
 

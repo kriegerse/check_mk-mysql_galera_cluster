@@ -1,6 +1,56 @@
 #!/usr/bin/env python
 
 
+# MySQL Galera Replication Health (mysql.galera_cluster_repl_health)
+register_check_parameters(
+   subgroup_applications,
+   'galera_repl_health',
+   _("MySQL Galera Replication Health"),
+   Dictionary(
+      help = _("Monitor the Cluster Replication Health"),
+      elements = [
+         ( "wsrep_local_recv_queue_avg",
+            Tuple(
+               title = "Recv queue length average", 
+               help = _("Recv queue length averaged over interval since the last FLUSH STATUS command. "
+                        "Values considerably larger than 0.0 mean that the node cannot apply write-sets as fast as they are received and will generate a lot of replication throttling."),
+               elements = [
+                  Float( title = _("Warning at/above"), default_value=0.5  ) ,
+                  Float( title = _("Critical at/above"), default_value=1.0  ) ,
+               ],
+            ),
+         ),
+         ( "wsrep_local_send_queue_avg",
+            Tuple(
+               title = "Send queue length average",  
+               help = _("Send queue length averaged over time since the last FLUSH STATUS command."
+                        "Values considerably larger than 0.0 indicate replication throttling or network throughput issue."),
+               elements = [
+                  Float( title = _("Warning at/above"), default_value=0.5  ) ,
+                  Float( title = _("Critical at/above"), default_value=1.0  ) ,
+               ],
+            ),
+         ),
+         ( "wsrep_flow_control_paused",
+            Tuple(
+               title = "Flow control paused",
+               help = _("The fraction of time since the last FLUSH STATUS command that replication was paused due to flow control. "
+                        "In other words, how much the slave lag is slowing down the cluster"),
+               elements = [
+                  Float( title = _("Warning at/above"), unit = _("seconds"), default_value=0.5  ) ,
+                  Float( title = _("Critical at/above"), unit = _("seconds"), default_value=0.7  ) ,
+               ],
+            ),
+         ),
+      ],
+   ),
+   TextUnicode(
+       title = _("Instance"),
+       help  = _("Only needed if you have multiple MySQL Galera Instances on one server"),
+   ),
+   "dict",
+)
+
 
 # MySQL Node State (mysql.galera_cluster_node_state)
 register_check_parameters(
