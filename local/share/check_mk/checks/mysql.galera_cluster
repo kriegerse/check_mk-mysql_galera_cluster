@@ -117,34 +117,36 @@ import time
 # cmk --checks=mysql.galera_cluster -nvp <hostname>
 
 
-############################################################################################
+###############################################################################
 # HELPER FUNCTIONS
-############################################################################################
-
+###############################################################################
 
 # this is just a helper using the default parse function delivered by check_mk
 def parse_mysql_galera(info):
     parsed = parse_mysql(info)
     return parsed
 
+
 # search for galera wsrep provided and yield if found
 def inventory_mysql_galera(parsed):
     for instance, values in parsed.items():
-       if 'wsrep_provider_name' in values:
-           if re.match('galera' , values['wsrep_provider_name'], flags=re.IGNORECASE):
-               yield instance, {}
+        if 'wsrep_provider_name' in values:
+            if re.match('galera', values['wsrep_provider_name'],
+                        flags=re.IGNORECASE):
+                yield instance, {}
+
 
 # set ok_code checks if the ok_code is higher
-def set_ok_code(current_ok_code = int(), new_ok_code = int()):
+def set_ok_code(current_ok_code=int(), new_ok_code=int()):
     ok_code = current_ok_code
     if new_ok_code > ok_code:
         ok_code = new_ok_code
 
     return ok_code
 
-############################################################################################
+###############################################################################
 # MySQL Galera Cluster State
-############################################################################################
+###############################################################################
 # run check from cli
 # cmk --checks=mysql.galera_cluster -nvp <hostname>
 #
@@ -153,11 +155,13 @@ def set_ok_code(current_ok_code = int(), new_ok_code = int()):
 # https://mariadb.com/kb/en/library/galera-cluster-status-variables/#wsrep_cluster_state_uuid
 # https://mariadb.com/kb/en/library/galera-cluster-status-variables/#wsrep_local_state_uuid
 
+
 # factory settings
 factory_settings["galera_cluster_state_default_levels"] = {
-    'wsrep_cluster_size' : (3,2,2),
-    'wsrep_cluster_status' : "Primary",
+    'wsrep_cluster_size': (3, 2, 2),
+    'wsrep_cluster_status': "Primary",
 }
+
 
 def check_galera_cluster_state(item, params, parsed):
     ok_code = 0
@@ -172,48 +176,57 @@ def check_galera_cluster_state(item, params, parsed):
     # check cluster size
     expected, warn, crit = params.get('wsrep_cluster_size')
     if 'wsrep_cluster_size' not in parsed[item]:
-        ok_code = set_ok_code(ok_code,3)
+        ok_code = set_ok_code(ok_code, 3)
         output.append("Could not find 'wsrep_cluster_size' in agent output")
     # cluster size is (below) crit
     elif int(parsed[item]['wsrep_cluster_size']) <= int(crit):
-        ok_code = set_ok_code(ok_code,2)
-        output.append("Size: " + str(parsed[item]['wsrep_cluster_size']) + " expected " + str(expected) + " crit at " + str(crit) + "(!!)")
+        ok_code = set_ok_code(ok_code, 2)
+        output.append(_("Size: " + str(parsed[item]['wsrep_cluster_size'])
+                        + " expected " + str(expected) + " crit at "
+                        + str(crit) + "(!!)"))
     # cluster size is (below) warn but aboth crit
-    elif ( int(parsed[item]['wsrep_cluster_size']) <= int(warn) and
-           int(parsed[item]['wsrep_cluster_size']) > int(crit)):
-        ok_code = set_ok_code(ok_code,1)
-        output.append("Size: " + str(parsed[item]['wsrep_cluster_size']) + " expected " + str(expected) + " warn at " + str(warn) +  "(!)")
+    elif (int(parsed[item]['wsrep_cluster_size']) <= int(warn)
+          and int(parsed[item]['wsrep_cluster_size']) > int(crit)):
+        ok_code = set_ok_code(ok_code, 1)
+        output.append(_("Size: " + str(parsed[item]['wsrep_cluster_size'])
+                        + " expected " + str(expected) + " warn at "
+                        + str(warn) + "(!)"))
     # everything is as expected
     else:
-        output.append("Size: " + str(parsed[item]['wsrep_cluster_size']) + " expected " + str(expected) )
-
+        output.append(_("Size: " + str(parsed[item]['wsrep_cluster_size'])
+                        + " expected " + str(expected)))
 
     # check cluster status
     if 'wsrep_cluster_status' not in parsed[item]:
-        ok_code = set_ok_code(ok_code,3)
+        ok_code = set_ok_code(ok_code, 3)
         output.append("Could not find 'wsrep_cluster_status' in agent output")
     # check for primary
-    elif str(parsed[item]['wsrep_cluster_status']) == str(params.get('wsrep_cluster_status')):
+    elif (str(parsed[item]['wsrep_cluster_status'])
+          == str(params.get('wsrep_cluster_status'))):
         output.append("Status: " + str(parsed[item]['wsrep_cluster_status']))
     # else alert, because we have some kind of non operational cluster
     else:
-        ok_code = set_ok_code(ok_code,2)
-        output.append("Status: " + str(parsed[item]['wsrep_cluster_status']) + "(!!)")
+        ok_code = set_ok_code(ok_code, 2)
+        output.append(_("Status: " + str(parsed[item]['wsrep_cluster_status'])
+                        + "(!!)"))
 
-    # print wsrep_cluster_conf_id value (shows the total number of cluster changes that have
-    # happened, which you can use to determine whether or not the node is a part of the Primary Component.)
+    # print wsrep_cluster_conf_id value (shows the total number of cluster
+    # changes that have happened, which you can use to determine whether
+    # or not the node is a part of the Primary Component.)
     if 'wsrep_cluster_conf_id' not in parsed[item]:
-	ok_code = set_ok_code(ok_code,2)
+        ok_code = set_ok_code(ok_code, 2)
         output.append("Could not find 'wsrep_cluster_conf_id' in agent output")
     else:
         output.append("ConfID: " + str(parsed[item]['wsrep_cluster_conf_id']))
 
-    # wsrep_cluster_state_uuid - Each node in the cluster should provide the same value.
-    # When a node carries a different value, this indicates that it is no longer connected
-    # to rest of the cluster. Once the node reestablishes connectivity, it realigns itself with the other nodes.
+    # wsrep_cluster_state_uuid - Each node in the cluster should provide
+    # the same value. When a node carries a different value, this indicates
+    # that it is no longer connected to rest of the cluster. Once the node
+    # reestablishes connectivity, it realigns itself with the other nodes.
     if 'wsrep_cluster_state_uuid' not in parsed[item]:
-        ok_code = set_ok_code(ok_code,2)
-        output.append("Could not find 'wsrep_cluster_state_uuid' in agent output")
+        ok_code = set_ok_code(ok_code, 2)
+        output.append(_("Could not find 'wsrep_cluster_state_uuid' in agent"
+                        " output"))
     else:
         output.append("UUID: " + str(parsed[item]['wsrep_cluster_state_uuid']))
 
@@ -222,19 +235,20 @@ def check_galera_cluster_state(item, params, parsed):
 
 # define the check
 check_info["mysql.galera_cluster"] = {
-    'parse_function':		parse_mysql_galera,
-    'check_function':		check_galera_cluster_state,
-    'inventory_function':	inventory_mysql_galera,
-    'default_levels_variable':	'galera_cluster_state_default_levels',
-    'service_description':	"MySQL Galera Cluster State %s",
-    'has_perfdata':		False,
-    'group':			'galera_cluster_state',
-    'includes':			[ "mysql" ],
+    'parse_function':		     parse_mysql_galera,
+    'check_function':		     check_galera_cluster_state,
+    'inventory_function':	     inventory_mysql_galera,
+    'default_levels_variable':	 'galera_cluster_state_default_levels',
+    'service_description':	     "MySQL Galera Cluster State %s",
+    'has_perfdata':		         False,
+    'group':			         'galera_cluster_state',
+    'includes':			         ["mysql"],
 }
 
-############################################################################################
+
+###############################################################################
 # MySQL Galera Node State
-############################################################################################
+###############################################################################
 # run check from cli
 # cmk --checks=mysql.galera_cluster_node_state -nvp <hostname>
 #
@@ -243,11 +257,10 @@ check_info["mysql.galera_cluster"] = {
 
 # factory settings
 factory_settings["galera_node_default_levels"] = {
-    'wsrep_ready' : 'ON',
+    'wsrep_ready': 'ON',
     'wsrep_connected': 'ON',
     'wsrep_local_state_comment': 'Initialized',
 }
-
 
 
 def check_galera_node_state(item, params, parsed):
@@ -260,59 +273,68 @@ def check_galera_node_state(item, params, parsed):
         output.append("Could not find instance '" + item + "'in agent output")
         return (ok_code, ', '.join(output))
 
-
-    # wsrep_ready - When the node returns a value of ON it can accept write-sets from the cluster.
-    # When it returns the value OFF, almost all queries fail with the error:
+    # wsrep_ready - When the node returns a value of ON it can accept
+    # write-sets from the cluster. When it returns the value OFF, almost all
+    # queries fail with the error:
     if 'wsrep_ready' not in parsed[item]:
-        ok_code = set_ok_code(ok_code,3)
+        ok_code = set_ok_code(ok_code, 3)
         output.append("Could not find 'wsrep_ready' in agent output")
     elif str(parsed[item]['wsrep_ready']) == str(params.get('wsrep_ready')):
         output.append("Ready: " + str(parsed[item]['wsrep_ready']))
     else:
-        ok_code = set_ok_code(ok_code,2)
+        ok_code = set_ok_code(ok_code, 2)
         output.append("Ready: " + str(parsed[item]['wsrep_ready']) + "(!!)")
 
-    # wsrep_connected - When the value is ON, the node has a network connection to one
-    # or more other nodes forming a cluster component.
-    # When the value is OFF, the node does not have a connection to any cluster components.
+    # wsrep_connected - When the value is ON, the node has a network connection
+    # to one or more other nodes forming a cluster component. When the value
+    # is OFF, the node does not have a connection to any cluster components.
     if 'wsrep_connected' not in parsed[item]:
-        ok_code = set_ok_code(ok_code,3)
+        ok_code = set_ok_code(ok_code, 3)
         output.append("Could not find 'wsrep_connected' in agent output")
-    elif str(parsed[item]['wsrep_connected']) == str(params.get('wsrep_connected')):
+    elif (str(parsed[item]['wsrep_connected'])
+          == str(params.get('wsrep_connected'))):
         output.append("Connected: " + str(parsed[item]['wsrep_connected']))
     else:
-        ok_code = set_ok_code(ok_code,2)
-        output.append("Connected: " + str(parsed[item]['wsrep_connected']) + "(!!)")
+        ok_code = set_ok_code(ok_code, 2)
+        output.append(_("Connected: " + str(parsed[item]['wsrep_connected'])
+                        + "(!!)"))
 
-    # wsrep_local_state_comment - When the node is part of the Primary Component, the typical return values are
-    # Joining, Waiting on SST, Joined, Synced or Donor.
-    # In the event that the node is part of a nonoperational component, the return value is Initialized.
+    # wsrep_local_state_comment - When the node is part of the Primary
+    # Component, the typical return values are Joining, Waiting on SST, Joined,
+    # Synced or Donor. In the event that the node is part of a nonoperational
+    # component, the return value is Initialized.
     if 'wsrep_local_state_comment' not in parsed[item]:
-        ok_code = set_ok_code(ok_code,3)
-        output.append("Could not find 'wsrep_local_state_comment' in agent output")
-    elif str(parsed[item]['wsrep_local_state_comment']) == str(params.get('wsrep_local_state_comment')):
-        ok_code = set_ok_code(ok_code,3)
-        output.append("State: " + str(parsed[item]['wsrep_local_state_comment']) + "(!!)")
+        ok_code = set_ok_code(ok_code, 3)
+        output.append(_("Could not find 'wsrep_local_state_comment' "
+                        "in agent output"))
+    elif (str(parsed[item]['wsrep_local_state_comment'])
+          == str(params.get('wsrep_local_state_comment'))):
+        ok_code = set_ok_code(ok_code, 3)
+        output.append(_("State: "
+                        + str(parsed[item]['wsrep_local_state_comment'])
+                        + "(!!)"))
     else:
-	output.append("State: " + str(parsed[item]['wsrep_local_state_comment']))
+        output.append(_("State: "
+                        + str(parsed[item]['wsrep_local_state_comment'])))
 
     return (ok_code, ', '.join(output))
 
 
 check_info["mysql.galera_cluster_node_state"] = {
-     'parse_function':		parse_mysql_galera,
-     'check_function':		check_galera_node_state,
-     'inventory_function':	inventory_mysql_galera,
+     'parse_function':		     parse_mysql_galera,
+     'check_function':		     check_galera_node_state,
+     'inventory_function':	     inventory_mysql_galera,
      'default_levels_variable':  'galera_node_default_levels',
      'service_description':      "MySQL Galera Node State %s",
      'has_perfdata':             False,
-     'group':			 'galera_node_state',
-     'includes':                 [ "mysql" ],
+     'group':			         'galera_node_state',
+     'includes':                 ["mysql"],
 }
 
-############################################################################################
+
+###############################################################################
 # MySQL Galera Replication Health
-############################################################################################
+###############################################################################
 # run check from cli
 # cmk --checks=mysql.galera_cluster_repl_health -nvp <hostname>
 #
@@ -321,9 +343,9 @@ check_info["mysql.galera_cluster_node_state"] = {
 
 # factory settings
 factory_settings['galera_repl_health_default_levels'] = {
-    'wsrep_local_recv_queue_avg' : (0.1,0.2),
-    'wsrep_local_send_queue_avg' : (0.1,0.2),
-    'wsrep_flow_control_paused': (0.5,0.7),
+    'wsrep_local_recv_queue_avg': (0.1, 0.2),
+    'wsrep_local_send_queue_avg': (0.1, 0.2),
+    'wsrep_flow_control_paused': (0.5, 0.7),
 }
 
 
@@ -337,12 +359,13 @@ def check_galera_repl_health(item, params, parsed):
 
     # check if agent output is available
     if item not in parsed:
-        ok_code = set_ok_code(ok_code,3)
+        ok_code = set_ok_code(ok_code, 3)
         output.append("Could not find instance '" + item + "'in agent output")
         return (ok_code, ', '.join(output))
 
-    # wsrep_local_recv_queue_avg - When the node returns a value higher than 0.0
-    # it means that the node cannot apply write-sets as fast as it receives them, which can lead to replication throttling.
+    # wsrep_local_recv_queue_avg - When the node returns a value higher than
+    # 0.0 it means that the node cannot apply write-sets as fast as it
+    # receives them, which can lead to replication throttling.
     warn, crit = params.get('wsrep_local_recv_queue_avg')
     if 'wsrep_local_recv_queue_avg' not in parsed[item]:
         ok_code = set_ok_code(ok_code,3)
