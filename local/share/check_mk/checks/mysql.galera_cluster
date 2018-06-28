@@ -26,8 +26,8 @@ import time
 # wsrep_commit_window     1.005712
 # wsrep_connected ON
 # wsrep_desync_count      0
-# wsrep_evs_delayed       
-# wsrep_evs_evict_list    
+# wsrep_evs_delayed
+# wsrep_evs_evict_list
 # wsrep_evs_repl_latency  0.00261012/0.00261012/0.00261012/0/1
 # wsrep_evs_state OPERATIONAL
 # wsrep_flow_control_paused       0.000296
@@ -77,7 +77,7 @@ import time
 # wsrep_cluster_name      galera_cluster_test
 # wsrep_convert_lock_to_trx       OFF
 # wsrep_data_home_dir     /var/lib/mysql
-# wsrep_dbug_option       
+# wsrep_dbug_option
 # wsrep_debug     OFF
 # wsrep_desync    OFF
 # wsrep_dirty_reads       OFF
@@ -93,11 +93,11 @@ import time
 # wsrep_node_address      db02
 # wsrep_node_incoming_address     AUTO
 # wsrep_node_name db02
-# wsrep_notify_cmd        
+# wsrep_notify_cmd
 # wsrep_on        ON
 # wsrep_patch_version     wsrep_25.21
 # wsrep_provider  /usr/lib64/galera/libgalera_smm.so
-# wsrep_provider_options  base_dir = /var/lib/mysql/; base_host = db02; base_port = 4567; cert.log_conflicts = no; debug = no; evs.auto_evict = 0; evs.causal_keepalive_period = PT1S; evs.debug_log_mask = 0x1; evs.delay_margin = PT1S; evs.delayed_keep_period = PT30S; evs.inactive_check_period = PT0.5S; evs.inactive_timeout = PT15S; evs.info_log_mask = 0; evs.install_timeout = PT7.5S; evs.join_retrans_period = PT1S; evs.keepalive_period = PT1S; evs.max_install_timeouts = 3; evs.send_window = 4; evs.stats_report_period = PT1M; evs.suspect_timeout = PT5S; evs.use_aggregate = true; evs.user_send_window = 2; evs.version = 0; evs.view_forget_timeout = P1D; gcache.dir = /var/lib/mysql/; gcache.keep_pages_size = 0; gcache.mem_size = 0; gcache.name = /var/lib/mysql//galera.cache; gcache.page_size = 128M; gcache.recover = no; gcache.size = 128M; gcomm.thread_prio = ; gcs.fc_debug = 0; gcs.fc_factor = 1.0; gcs.fc_limit = 16; gcs.fc_master_slave = no; gcs.max_packet_size = 64500; gcs.max_throttle = 0.25; gcs.recv_q_hard_limit = 9223372036854775807; gcs.recv_q_soft_limit = 0.25; gcs.sync_donor = no; gmcast.listen_addr = tcp://0.0.0.0:4567; gmcast.mcast_addr = ; gmcast.mcast_ttl = 1; gmcast.peer_timeout = PT3S; gmcast.segment = 0; gmcast.time_wait = PT5S; gmcast.version = 0; ist.recv_addr = db02; pc.announce_timeout = PT3S; pc.checksum = false; pc.ignore_quorum = false; pc.ignore_sb = false; pc.linger = PT20S; pc.npvo = false; pc.recovery = true; pc.version = 0; pc.wait_prim = true; pc.wait_prim_timeout = PT30S; pc.weight = 1; protonet.backend = asio; protonet.version = 0; repl.causal_read_timeout = PT30S; repl.commit_order = 3; repl.key_format = FLAT8; repl.max_ws_size = 2147483647; repl.proto_max = 8; socket.checksum = 2; socket.recv_buf_size = 212992; 
+# wsrep_provider_options  base_dir = /var/lib/mysql/; base_host = db02; base_port = 4567; cert.log_conflicts = no; debug = no; evs.auto_evict = 0; evs.causal_keepalive_period = PT1S; evs.debug_log_mask = 0x1; evs.delay_margin = PT1S; evs.delayed_keep_period = PT30S; evs.inactive_check_period = PT0.5S; evs.inactive_timeout = PT15S; evs.info_log_mask = 0; evs.install_timeout = PT7.5S; evs.join_retrans_period = PT1S; evs.keepalive_period = PT1S; evs.max_install_timeouts = 3; evs.send_window = 4; evs.stats_report_period = PT1M; evs.suspect_timeout = PT5S; evs.use_aggregate = true; evs.user_send_window = 2; evs.version = 0; evs.view_forget_timeout = P1D; gcache.dir = /var/lib/mysql/; gcache.keep_pages_size = 0; gcache.mem_size = 0; gcache.name = /var/lib/mysql//galera.cache; gcache.page_size = 128M; gcache.recover = no; gcache.size = 128M; gcomm.thread_prio = ; gcs.fc_debug = 0; gcs.fc_factor = 1.0; gcs.fc_limit = 16; gcs.fc_master_slave = no; gcs.max_packet_size = 64500; gcs.max_throttle = 0.25; gcs.recv_q_hard_limit = 9223372036854775807; gcs.recv_q_soft_limit = 0.25; gcs.sync_donor = no; gmcast.listen_addr = tcp://0.0.0.0:4567; gmcast.mcast_addr = ; gmcast.mcast_ttl = 1; gmcast.peer_timeout = PT3S; gmcast.segment = 0; gmcast.time_wait = PT5S; gmcast.version = 0; ist.recv_addr = db02; pc.announce_timeout = PT3S; pc.checksum = false; pc.ignore_quorum = false; pc.ignore_sb = false; pc.linger = PT20S; pc.npvo = false; pc.recovery = true; pc.version = 0; pc.wait_prim = true; pc.wait_prim_timeout = PT30S; pc.weight = 1; protonet.backend = asio; protonet.version = 0; repl.causal_read_timeout = PT30S; repl.commit_order = 3; repl.key_format = FLAT8; repl.max_ws_size = 2147483647; repl.proto_max = 8; socket.checksum = 2; socket.recv_buf_size = 212992;
 # wsrep_recover   OFF
 # wsrep_replicate_myisam  OFF
 # wsrep_restart_slave     OFF
@@ -105,47 +105,47 @@ import time
 # wsrep_slave_fk_checks   ON
 # wsrep_slave_uk_checks   OFF
 # wsrep_slave_threads     1
-# wsrep_sst_auth  
-# wsrep_sst_donor 
+# wsrep_sst_auth
+# wsrep_sst_donor
 # wsrep_sst_donor_rejects_queries OFF
 # wsrep_sst_method        mariabackup
 # wsrep_sst_receive_address       AUTO
 # wsrep_start_position    7bdbb8e7-19aa-11e8-9e1b-1febdeb321f0:41942
 # wsrep_sync_wait 0
 
-# run check from cli 
+# run check from cli
 # cmk --checks=mysql.galera_cluster -nvp <hostname>
 
 
 ############################################################################################
-# HELPER FUNCTIONS 
+# HELPER FUNCTIONS
 ############################################################################################
 
 
 # this is just a helper using the default parse function delivered by check_mk
 def parse_mysql_galera(info):
     parsed = parse_mysql(info)
-    return parsed 
+    return parsed
 
 # search for galera wsrep provided and yield if found
 def inventory_mysql_galera(parsed):
     for instance, values in parsed.items():
        if 'wsrep_provider_name' in values:
-           if re.match('galera' , values['wsrep_provider_name'], flags=re.IGNORECASE): 
+           if re.match('galera' , values['wsrep_provider_name'], flags=re.IGNORECASE):
                yield instance, {}
 
-# set ok_code checks if the ok_code is higher 
+# set ok_code checks if the ok_code is higher
 def set_ok_code(current_ok_code = int(), new_ok_code = int()):
     ok_code = current_ok_code
     if new_ok_code > ok_code:
         ok_code = new_ok_code
-       
+
     return ok_code
 
 ############################################################################################
 # MySQL Galera Cluster State
 ############################################################################################
-# run check from cli 
+# run check from cli
 # cmk --checks=mysql.galera_cluster -nvp <hostname>
 #
 # based on:
@@ -153,7 +153,7 @@ def set_ok_code(current_ok_code = int(), new_ok_code = int()):
 # https://mariadb.com/kb/en/library/galera-cluster-status-variables/#wsrep_cluster_state_uuid
 # https://mariadb.com/kb/en/library/galera-cluster-status-variables/#wsrep_local_state_uuid
 
-# factory settings 
+# factory settings
 factory_settings["galera_cluster_state_default_levels"] = {
     'wsrep_cluster_size' : (3,2,2),
     'wsrep_cluster_status' : "Primary",
@@ -162,14 +162,14 @@ factory_settings["galera_cluster_state_default_levels"] = {
 def check_galera_cluster_state(item, params, parsed):
     ok_code = 0
     output = list()
-    
-    # check if agent output is available 
+
+    # check if agent output is available
     if item not in parsed:
         ok_code = 3
         output.append("Could not find instance '" + item + "'in agent output")
         return (ok_code, ', '.join(output))
-    
-    # check cluster size 
+
+    # check cluster size
     expected, warn, crit = params.get('wsrep_cluster_size')
     if 'wsrep_cluster_size' not in parsed[item]:
         ok_code = set_ok_code(ok_code,3)
@@ -178,7 +178,7 @@ def check_galera_cluster_state(item, params, parsed):
     elif int(parsed[item]['wsrep_cluster_size']) <= int(crit):
         ok_code = set_ok_code(ok_code,2)
         output.append("Size: " + str(parsed[item]['wsrep_cluster_size']) + " expected " + str(expected) + " crit at " + str(crit) + "(!!)")
-    # cluster size is (below) warn but aboth crit 
+    # cluster size is (below) warn but aboth crit
     elif ( int(parsed[item]['wsrep_cluster_size']) <= int(warn) and
            int(parsed[item]['wsrep_cluster_size']) > int(crit)):
         ok_code = set_ok_code(ok_code,1)
@@ -187,36 +187,36 @@ def check_galera_cluster_state(item, params, parsed):
     else:
         output.append("Size: " + str(parsed[item]['wsrep_cluster_size']) + " expected " + str(expected) )
 
-    
+
     # check cluster status
     if 'wsrep_cluster_status' not in parsed[item]:
-	ok_code = set_ok_code(ok_code,3)
+        ok_code = set_ok_code(ok_code,3)
         output.append("Could not find 'wsrep_cluster_status' in agent output")
-    # check for primary 
+    # check for primary
     elif str(parsed[item]['wsrep_cluster_status']) == str(params.get('wsrep_cluster_status')):
-	output.append("Status: " + str(parsed[item]['wsrep_cluster_status']))
+        output.append("Status: " + str(parsed[item]['wsrep_cluster_status']))
     # else alert, because we have some kind of non operational cluster
     else:
-	ok_code = set_ok_code(ok_code,2)
+        ok_code = set_ok_code(ok_code,2)
         output.append("Status: " + str(parsed[item]['wsrep_cluster_status']) + "(!!)")
 
-    # print wsrep_cluster_conf_id value (shows the total number of cluster changes that have 
+    # print wsrep_cluster_conf_id value (shows the total number of cluster changes that have
     # happened, which you can use to determine whether or not the node is a part of the Primary Component.)
     if 'wsrep_cluster_conf_id' not in parsed[item]:
 	ok_code = set_ok_code(ok_code,2)
         output.append("Could not find 'wsrep_cluster_conf_id' in agent output")
-    else: 
+    else:
         output.append("ConfID: " + str(parsed[item]['wsrep_cluster_conf_id']))
-         
-    # wsrep_cluster_state_uuid - Each node in the cluster should provide the same value. 
-    # When a node carries a different value, this indicates that it is no longer connected 
+
+    # wsrep_cluster_state_uuid - Each node in the cluster should provide the same value.
+    # When a node carries a different value, this indicates that it is no longer connected
     # to rest of the cluster. Once the node reestablishes connectivity, it realigns itself with the other nodes.
     if 'wsrep_cluster_state_uuid' not in parsed[item]:
         ok_code = set_ok_code(ok_code,2)
         output.append("Could not find 'wsrep_cluster_state_uuid' in agent output")
     else:
         output.append("UUID: " + str(parsed[item]['wsrep_cluster_state_uuid']))
- 
+
     return (ok_code, ', '.join(output))
 
 
@@ -235,13 +235,13 @@ check_info["mysql.galera_cluster"] = {
 ############################################################################################
 # MySQL Galera Node State
 ############################################################################################
-# run check from cli 
+# run check from cli
 # cmk --checks=mysql.galera_cluster_node_state -nvp <hostname>
 #
 # based on:
 # http://galeracluster.com/documentation-webpages/monitoringthecluster.html#checking-the-node-status
 
-# factory settings 
+# factory settings
 factory_settings["galera_node_default_levels"] = {
     'wsrep_ready' : 'ON',
     'wsrep_connected': 'ON',
@@ -254,38 +254,38 @@ def check_galera_node_state(item, params, parsed):
     ok_code = 0
     output = list()
 
-    # check if agent output is available 
+    # check if agent output is available
     if item not in parsed:
         ok_code = 3
         output.append("Could not find instance '" + item + "'in agent output")
         return (ok_code, ', '.join(output))
 
 
-    # wsrep_ready - When the node returns a value of ON it can accept write-sets from the cluster. 
+    # wsrep_ready - When the node returns a value of ON it can accept write-sets from the cluster.
     # When it returns the value OFF, almost all queries fail with the error:
     if 'wsrep_ready' not in parsed[item]:
         ok_code = set_ok_code(ok_code,3)
         output.append("Could not find 'wsrep_ready' in agent output")
     elif str(parsed[item]['wsrep_ready']) == str(params.get('wsrep_ready')):
         output.append("Ready: " + str(parsed[item]['wsrep_ready']))
-    else: 
+    else:
         ok_code = set_ok_code(ok_code,2)
-        output.append("Ready: " + str(parsed[item]['wsrep_ready']) + "(!!)") 
+        output.append("Ready: " + str(parsed[item]['wsrep_ready']) + "(!!)")
 
-    # wsrep_connected - When the value is ON, the node has a network connection to one 
-    # or more other nodes forming a cluster component. 
+    # wsrep_connected - When the value is ON, the node has a network connection to one
+    # or more other nodes forming a cluster component.
     # When the value is OFF, the node does not have a connection to any cluster components.
     if 'wsrep_connected' not in parsed[item]:
         ok_code = set_ok_code(ok_code,3)
         output.append("Could not find 'wsrep_connected' in agent output")
     elif str(parsed[item]['wsrep_connected']) == str(params.get('wsrep_connected')):
         output.append("Connected: " + str(parsed[item]['wsrep_connected']))
-    else: 
+    else:
         ok_code = set_ok_code(ok_code,2)
         output.append("Connected: " + str(parsed[item]['wsrep_connected']) + "(!!)")
 
-    # wsrep_local_state_comment - When the node is part of the Primary Component, the typical return values are 
-    # Joining, Waiting on SST, Joined, Synced or Donor. 
+    # wsrep_local_state_comment - When the node is part of the Primary Component, the typical return values are
+    # Joining, Waiting on SST, Joined, Synced or Donor.
     # In the event that the node is part of a nonoperational component, the return value is Initialized.
     if 'wsrep_local_state_comment' not in parsed[item]:
         ok_code = set_ok_code(ok_code,3)
@@ -313,13 +313,13 @@ check_info["mysql.galera_cluster_node_state"] = {
 ############################################################################################
 # MySQL Galera Replication Health
 ############################################################################################
-# run check from cli 
+# run check from cli
 # cmk --checks=mysql.galera_cluster_repl_health -nvp <hostname>
 #
 # based on:
 # http://galeracluster.com/documentation-webpages/monitoringthecluster.html#checking-the-replication-health
 
-# factory settings 
+# factory settings
 factory_settings['galera_repl_health_default_levels'] = {
     'wsrep_local_recv_queue_avg' : (0.1,0.2),
     'wsrep_local_send_queue_avg' : (0.1,0.2),
@@ -335,25 +335,25 @@ def check_galera_repl_health(item, params, parsed):
     warn = None
     crit = None
 
-    # check if agent output is available 
+    # check if agent output is available
     if item not in parsed:
         ok_code = set_ok_code(ok_code,3)
         output.append("Could not find instance '" + item + "'in agent output")
         return (ok_code, ', '.join(output))
 
-    # wsrep_local_recv_queue_avg - When the node returns a value higher than 0.0 
+    # wsrep_local_recv_queue_avg - When the node returns a value higher than 0.0
     # it means that the node cannot apply write-sets as fast as it receives them, which can lead to replication throttling.
     warn, crit = params.get('wsrep_local_recv_queue_avg')
     if 'wsrep_local_recv_queue_avg' not in parsed[item]:
         ok_code = set_ok_code(ok_code,3)
         output.append("Could not find 'wsrep_local_recv_queue_avg' in agent output")
-    elif ( float(parsed[item]['wsrep_local_recv_queue_avg']) >= float(warn) and 
+    elif ( float(parsed[item]['wsrep_local_recv_queue_avg']) >= float(warn) and
          float(parsed[item]['wsrep_local_recv_queue_avg']) <= float(crit) ):
         ok_code = set_ok_code(ok_code,1)
-        output.append("RecvQ avg: " +  str(round(float(parsed[item]['wsrep_local_recv_queue_avg']),2)) + " warn at: " + str(warn) + "(!)") 
-    elif float(parsed[item]['wsrep_local_recv_queue_avg']) >= float(crit): 
+        output.append("RecvQ avg: " +  str(round(float(parsed[item]['wsrep_local_recv_queue_avg']),2)) + " warn at: " + str(warn) + "(!)")
+    elif float(parsed[item]['wsrep_local_recv_queue_avg']) >= float(crit):
         ok_code = set_ok_code(ok_code,2)
-        output.append("RecvQ avg: " +  str(round(float(parsed[item]['wsrep_local_recv_queue_avg']),2)) + " crit at: " + str(crit) + "(!!)") 
+        output.append("RecvQ avg: " +  str(round(float(parsed[item]['wsrep_local_recv_queue_avg']),2)) + " crit at: " + str(crit) + "(!!)")
     else:
         output.append("RecvQ avg: " + str(round(float(parsed[item]['wsrep_local_recv_queue_avg']),2)))
 
@@ -363,8 +363,8 @@ def check_galera_repl_health(item, params, parsed):
     perfdata.append( ('recv_queue',     float(parsed[item]['wsrep_local_recv_queue'])    , None, None) )
 
 
-    # wsrep_local_send_queue_avg - Values much greater than 0.0 indicate 
-    # replication throttling or network throughput issues, such as a bottleneck on the network link. 
+    # wsrep_local_send_queue_avg - Values much greater than 0.0 indicate
+    # replication throttling or network throughput issues, such as a bottleneck on the network link.
     warn, crit = params.get('wsrep_local_send_queue_avg')
     if 'wsrep_local_send_queue_avg' not in parsed[item]:
         ok_code = set_ok_code(ok_code,3)
@@ -385,8 +385,8 @@ def check_galera_repl_health(item, params, parsed):
     perfdata.append( ('send_queue',     float(parsed[item]['wsrep_local_send_queue']),     None, None) )
 
 
-    # wsrep_flow_control_paused - Ideally, the return value should stay as close to 0.0 as possible, 
-    # since this means the node is not falling behind the cluster. In the event that you find that the node is pausing frequently, 
+    # wsrep_flow_control_paused - Ideally, the return value should stay as close to 0.0 as possible,
+    # since this means the node is not falling behind the cluster. In the event that you find that the node is pausing frequently,
     # you can adjust the wsrep_slave_threads parameter or you can exclude the node from the cluster.
     warn, crit = params.get('wsrep_flow_control_paused')
     if 'wsrep_flow_control_paused' not in parsed[item]:
@@ -409,7 +409,7 @@ def check_galera_repl_health(item, params, parsed):
     perfdata.append( ('flow_control_sent', float(flow_control_sent), None, None) )
 
 
-    # wsrep_cert_deps_distance - shows the average distance between the lowest and highest seqno, 
+    # wsrep_cert_deps_distance - shows the average distance between the lowest and highest seqno,
     # values that the node can possibly apply in parallel. his represents the node’s potential degree for parallelization.
     perfdata.append( ('cert_deps_distance', float(parsed[item]['wsrep_cert_deps_distance']), None, None) )
 
@@ -427,4 +427,3 @@ check_info["mysql.galera_cluster_repl_health"] = {
      'group':                    'galera_repl_health',
      'includes':                 [ "mysql" ],
 }
-
