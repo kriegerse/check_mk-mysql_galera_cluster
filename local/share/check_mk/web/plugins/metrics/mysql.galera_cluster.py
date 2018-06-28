@@ -166,8 +166,8 @@ graph_info.append( {
 graph_info.append( {
    "title":       _("Flow Control Recv/Sent"),
    "metrics":      [
-       ( "flow_control_recv",   "line" ),
-       ( "flow_control_sent",   "-line" ),
+       ( "flow_control_recv",   "area" ),
+       ( "flow_control_sent",   "-area" ),
    ],
 })
 
