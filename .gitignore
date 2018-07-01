@@ -4,8 +4,10 @@ share
 lib
 include
 bin
+!local/share/
 
 # ignore check_mk working dirs 
+!var/check_mk/packages/
 var
 tmp
 etc
@@ -16,5 +18,7 @@ etc
 .j4p
 .modulebuildrc
 .pip/
+.vim/
 .profile
 .viminfo
+.gitconfig
