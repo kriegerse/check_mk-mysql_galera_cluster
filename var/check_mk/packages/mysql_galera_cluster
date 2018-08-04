@@ -1,4 +1,4 @@
-{'author': 'Sebastian Krieger <s.krieger@web.de>',
+{'author': 'Sebastian Krieger <s_krieger@web.de>',
  'description': 'This check allows to monitor various KPIs of a MySQL Galera Cluster',
  'download_url': 'https://github.com/kriegerse/check_mk-galera_cluster',
  'files': {'agents': [],
