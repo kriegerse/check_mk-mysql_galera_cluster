@@ -161,9 +161,39 @@ import time
 # HELPER FUNCTIONS
 ###############################################################################
 
-# this is just a helper using the default parse function delivered by check_mk
+# FIXME: Crapy copy n paste! Consolidate with other mysql_* parse functions
 def parse_mysql_galera(info):
-    parsed = parse_mysql(info)
+    def parse_line(line):
+       if len(line) == 2:
+           varname, value = line
+           try:
+               value = int(value)
+           except:
+                pass
+       else:
+           varname = line[0]
+           value = None
+       return varname, value
+
+    parsed = {}
+    instance = False
+    for line in info:
+        if line[0].startswith("[["):
+            instance = line[0][2:-2]
+            if instance == "":
+                instance = "mysql"
+            parsed[instance] = {}
+        elif instance:
+            varname, value = parse_line(line)
+            parsed[instance][varname] = value
+
+    # Old Agent Plugin, no Instances in output
+    if not instance:
+        parsed['mysql'] = {}
+        for line in info:
+            varname, value = parse_line(line)
+            parsed['mysql'][varname] = value
+
     return parsed
 
 
@@ -282,7 +312,6 @@ check_info["mysql.galera_cluster"] = {
     'service_description':         "MySQL Galera Cluster State %s",
     'has_perfdata':                 False,
     'group':                     'galera_cluster_state',
-    'includes':                     ["mysql"],
 }
 
 
@@ -368,7 +397,6 @@ check_info["mysql.galera_cluster_node_state"] = {
      'service_description':      "MySQL Galera Node State %s",
      'has_perfdata':             False,
      'group':                     'galera_node_state',
-     'includes':                 ["mysql"],
 }
 
 
@@ -523,5 +551,4 @@ check_info["mysql.galera_cluster_repl_health"] = {
      'service_description':      "MySQL Galera Replication Health %s",
      'has_perfdata':             True,
      'group':                    'galera_repl_health',
-     'includes':                 ["mysql"],
 }
