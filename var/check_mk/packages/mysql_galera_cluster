@@ -1,4 +1,4 @@
-{'author': 'Sebastian Krieger <s_krieger@web.de>',
+{'author': 'Sebastian Krieger <s_krieger@web.de>; Bugfix breaking mysql.innodb_io by moschlar <moschlar@metalabs.de>',
  'description': 'This check allows to monitor various KPIs of a MySQL Galera Cluster',
  'download_url': 'https://github.com/kriegerse/check_mk-galera_cluster',
  'files': {'agents': [],
@@ -16,7 +16,8 @@
            'web': ['plugins/metrics/mysql.galera_cluster.py',
                    'plugins/wato/check_parameters_mysql.galera_cluster.py']},
  'name': 'mysql_galera_cluster',
+ 'num_files': 6,
  'title': 'MySQL Galera Cluster',
- 'version': '1.0',
- 'version.min_required': '1.4.0p24',
- 'version.packaged': '1.4.0p24'}
+ 'version': '1.1',
+ 'version.min_required': '1.5.0p10',
+ 'version.packaged': '1.5.0p10'}
