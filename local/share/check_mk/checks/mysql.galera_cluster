@@ -1,9 +1,6 @@
 #!/usr/bin/python
 # -*- encoding: utf-8; py-indent-offset: 4 -*-
 
-import re
-import time
-
 # example agent output:
 # <<<mysql>>>
 # [[]]
@@ -200,9 +197,8 @@ def parse_mysql_galera(info):
 # search for galera wsrep provided and yield if found
 def inventory_mysql_galera(parsed):
     for instance, values in parsed.items():
-        if 'wsrep_provider_name' in values:
-            if re.match('galera', values['wsrep_provider_name'],
-                        flags=re.IGNORECASE):
+        if 'wsrep_provider_name' in values and values['wsrep_provider_name']:
+            if 'galera' in values['wsrep_provider_name'].lower():
                 yield instance, {}
 
 
