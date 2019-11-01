@@ -3,15 +3,15 @@ agents: linux
 catalog: app/mysql
 license: GPL
 inventory:
-  The check yields for each running MySQL instance parsing the mysql section of 
+  The check yields for each running MySQL instance parsing the mysql section of
   check_mk_agent output. It will return "mysql" in case only one instance is running.
   This is the same behavior as for the standard MySQL checks delivered with
   check_mk.
 description:
   This check follows the guide for Galera Cluster Monitoring
-  (http://galeracluster.com/documentation-webpages/monitoringthecluster.html#checking-the-node-status)
+  (https://galeracluster.com/library/documentation/monitoring-cluster.html#check-node-status)
   It will show information about the readyness of the Node and if the Node is connected with any other
-  Cluster Node. For both thersholds can be defined, which are by default "ON" and indicates a healthy 
+  Cluster Node. For both thersholds can be defined, which are by default "ON" and indicates a healthy
   node.
   Additonally the Node state is monitored and a threshold can be set when it should throw an alert.
   This is "Initialized" by default which indicates a none operational node in the cluster.
