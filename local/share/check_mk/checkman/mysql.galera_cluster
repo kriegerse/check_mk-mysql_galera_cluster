@@ -6,11 +6,11 @@ inventory:
   The check yields for each running MySQL instance parsing the mysql section of
   check_mk_agent output. It will return "mysql" in case only one instance is running.
   This is the same behavior as for the standard MySQL checks delivered with
-  check_mk. 
+  check_mk.
 description:
-  This check follows the guide for Galera Cluster Monitoring 
-  (http://galeracluster.com/documentation-webpages/monitoringthecluster.html#checking-cluster-integrity). 
+  This check follows the guide for Galera Cluster Monitoring
+  (https://galeracluster.com/library/documentation/monitoring-cluster.html#check-cluster-integrity).
   It will show information about the Cluster UUID which must be the same on all Cluster Nodes.
   The ConfID will show the number of Cluster Changes and shoud be the same for all Cluster Nodes.
-  The cluster size can be monitored with the number of members and will be alerted if the Nodes are below 
+  The cluster size can be monitored with the number of members and will be alerted if the Nodes are below
   a critical threshold. Also the expected Status can be configured which is "Primary" by default.

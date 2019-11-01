@@ -3,16 +3,16 @@ agents: linux
 catalog: app/mysql
 license: GPL
 inventory:
-  The check yields for each running MySQL instance parsing the mysql section of 
+  The check yields for each running MySQL instance parsing the mysql section of
   check_mk_agent output. It will return "mysql" in case only one instance is running.
   This is the same behavior as for the standard MySQL checks delivered with
   check_mk.
 description:
   This check follows the guide for Galera Cluster Monitoring
-  (http://galeracluster.com/documentation-webpages/monitoringthecluster.html#checking-the-replication-health).
+  (https://galeracluster.com/library/documentation/monitoring-cluster.html#check-replication-health).
   The check will provide performance data for Recv/Send Queues which gives hints about a replication throttling.
   For the send/recv queue average a threshold can be defined, when the check should alert for the same.
-  A threhsold for the FlowControlPaused can be configured. Nodes often pauses will fall behind the 
-  cluster and can give a hint for tuning the slave threads. 
-  Additionally performance data for Cert deps distance (representing the node’s potential degree for parallelization) 
+  A threhsold for the FlowControlPaused can be configured. Nodes often pauses will fall behind the
+  cluster and can give a hint for tuning the slave threads.
+  Additionally performance data for Cert deps distance (representing the node’s potential degree for parallelization)
   and Flow Control Recv/Send are measured.

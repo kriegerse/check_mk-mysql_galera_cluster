@@ -217,7 +217,7 @@ def set_ok_code(current_ok_code=int(), new_ok_code=int()):
 # cmk --checks=mysql.galera_cluster -nvp <hostname>
 #
 # based on:
-# http://galeracluster.com/documentation-webpages/monitoringthecluster.html#checking-cluster-integrity
+# https://galeracluster.com/library/documentation/monitoring-cluster.html#check-cluster-integrity
 # https://mariadb.com/kb/en/library/galera-cluster-status-variables/#wsrep_cluster_state_uuid
 # https://mariadb.com/kb/en/library/galera-cluster-status-variables/#wsrep_local_state_uuid
 
@@ -318,7 +318,7 @@ check_info["mysql.galera_cluster"] = {
 # cmk --checks=mysql.galera_cluster_node_state -nvp <hostname>
 #
 # based on:
-# http://galeracluster.com/documentation-webpages/monitoringthecluster.html#checking-the-node-status
+# https://galeracluster.com/library/documentation/monitoring-cluster.html#check-node-statu
 
 # factory settings
 factory_settings["galera_node_default_levels"] = {
@@ -403,7 +403,7 @@ check_info["mysql.galera_cluster_node_state"] = {
 # cmk --checks=mysql.galera_cluster_repl_health -nvp <hostname>
 #
 # based on:
-# http://galeracluster.com/documentation-webpages/monitoringthecluster.html#checking-the-replication-health
+# https://galeracluster.com/library/documentation/monitoring-cluster.html#check-replication-health
 
 # factory settings
 factory_settings['galera_repl_health_default_levels'] = {
